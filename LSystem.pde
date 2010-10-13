@@ -5,12 +5,13 @@ class LSystem {
   int angle;
 
   LSystem(int steps, float xpos, float ypos) {
-    _start = "F";
+    _start = "FX";
   
   // other goodies  
   // "F+FF-+F"
   // "F+FF−F−F+F"
-    _rules.put("F", "F+FF−F−F+F");
+    _rules.put("X", "X+YF");
+    _rules.put("Y", "FX-Y");
     angle = 0;
     a = new Point(xpos, ypos);
     b = new Point(0, 0);
@@ -26,8 +27,11 @@ class LSystem {
     for(int i = 0; i < _start.length(); i++) {
       char letter = _start.charAt(i);
       switch(letter) {
-      case 'F':
-        evolution += _rules.get("F");
+      case 'X':
+        evolution += _rules.get("X");
+        break;
+      case 'Y':
+        evolution += _rules.get("Y");
         break;
       default:
         evolution += letter;
